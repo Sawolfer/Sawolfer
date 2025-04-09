@@ -1,3 +1,7 @@
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%3F4CD817&lines=Innopolis+university+student)](https://git.io/typing-svg)
+
+###
+
 <h2 align="left">Hello there! My name is Savva and I'm a iOS Developer from Russia.</h2>
 
 ###
@@ -9,7 +13,7 @@
 
 ###
 
-<img align="right" height="150" src="https://i.imgflip.com/65efzo.gif"  />
+<img align="right" height="150" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJzNnBlcnJocnJrZHhycTZmdjB1eXo4NGc1bXNkdHJhdm9jcGxpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Dh5q0sShxgp13DwrvG/giphy.gif"  />
 
 ###
 
