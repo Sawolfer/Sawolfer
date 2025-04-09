@@ -83,7 +83,7 @@
 
 ###
 
-<img src="https://raw.githubusercontent.com/Sawolfer/Sawolfer/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/Sawolfer/Sawolfer/output/snake.svg" alt="Snake animation" style="background-color: transparent;" />
 
 ###
 
