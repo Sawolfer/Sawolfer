@@ -85,14 +85,14 @@
 </div>
 
 ###
-<!-- 
-<img src="https://raw.githubusercontent.com/Sawolfer/Sawolfer/output/snake.svg" alt="Snake animation" /> -->
-
-###
 
 <div align="center">
-  <img src="https://img.shields.io/static/v1?message=Telegram&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="40" alt="telegram logo"  />
+  <a href="https://t.me/BrainPumpkin" target="_blank">
+  <img src="https://img.shields.io/static/v1?message=Telegram&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="40" alt="telegram logo"/>
+  </a>
+  <a href="https://discord.com/users/620312686508638209" target="_blank">
   <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="40" alt="discord logo"  />
+  </a>
 </div>
 
 ###
