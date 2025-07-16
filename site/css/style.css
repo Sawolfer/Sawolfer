@@ -283,6 +283,15 @@ body.dark-mode .tech-badge {
     border-radius: 18px;
     padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+}
+
+body.dark-mode .skill-category {
+    background-color: var(--ios-card-dark);
 }
 
 .skill-category-title {
@@ -291,6 +300,10 @@ body.dark-mode .tech-badge {
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+}
+
+body.dark-mode .skill-category-title {
+    color: white;
 }
 
 .skill-category-title i {
@@ -309,6 +322,10 @@ body.dark-mode .tech-badge {
     font-size: 0.9rem;
 }
 
+body.dark-mode .skill-name {
+    color: #E5E5EA;
+}
+
 .skill-bar {
     height: 6px;
     background-color: rgba(0, 122, 255, 0.1);
@@ -316,9 +333,13 @@ body.dark-mode .tech-badge {
     overflow: hidden;
 }
 
+body.dark-mode .skill-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .skill-progress {
     height: 100%;
-    background: linear-gradient(90deg, #007aff, #00c7ff);
+    background: linear-gradient(90deg, #007AFF, #00C7FF);
     border-radius: 3px;
     transition: width 1s ease;
 }
