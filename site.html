@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savva Ponomarev - iOS Developer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --ios-blue: #007aff;
+        --ios-gray: #f2f2f7;
+        --ios-dark: #1c1c1e;
+        --ios-card-light: #ffffff;
+        --ios-card-dark: #2c2c2e;
+        --text-primary: #1c1c1e;
+        --text-secondary: #636366;
+        --text-tertiary: #aeaeb2;
+      }
+
+      @font-face {
+        font-family: "SF Pro Display";
+        src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+      }
+
+      body {
+        background-color: var(--ios-gray);
+        color: var(--text-primary);
+        transition: background-color 0.5s ease;
+        overflow-x: hidden;
+      }
+
+      body.dark-mode {
+        background-color: var(--ios-dark);
+        color: white;
+      }
+
+      body.dark-mode .app-card {
+        background-color: var(--ios-card-dark);
+      }
+
+      body.dark-mode .section-title {
+        color: white;
+      }
+
+      body.dark-mode .text-secondary {
+        color: #d1d1d6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        padding: 60px 0 40px;
+        text-align: center;
+        position: relative;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 28px;
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 4px solid white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image:hover {
+        transform: scale(1.05);
+      }
+
+      .name {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        background: linear-gradient(90deg, #007aff, #34c759);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .title {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .contact-badges {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        background-color: rgba(0, 122, 255, 0.1);
+        border-radius: 50px;
+        color: var(--ios-blue);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .badge:hover {
+        background-color: rgba(0, 122, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .badge i {
+        margin-right: 6px;
+      }
+
+      .download-cv {
+        margin-top: 25px;
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: var(--ios-blue);
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 500;
+        box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .download-cv:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(0, 122, 255, 0.4);
+      }
+
+      /* Dark Mode Toggle */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--ios-card-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      body.dark-mode .dark-mode-toggle {
+        background-color: var(--ios-card-dark);
+      }
+
+      .dark-mode-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      /* Sections */
+      .section {
+        margin-bottom: 60px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50px;
+        height: 4px;
+        background: linear-gradient(90deg, #007aff, #34c759);
+        border-radius: 2px;
+      }
+
+      /* App Cards */
+      .app-card {
+        background-color: var(--ios-card-light);
+        border-radius: 18px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .app-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .app-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .app-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #007aff, #00c7ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .app-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 3px;
+      }
+
+      .app-subtitle {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .app-description {
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+      }
+
+      .tech-badge {
+        padding: 5px 12px;
+        background-color: rgba(0, 122, 255, 0.1);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        color: var(--ios-blue);
+      }
+
+      body.dark-mode .tech-badge {
+        background-color: rgba(0, 122, 255, 0.2);
+      }
+
+      /* Skills Grid */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .skill-category {
+        background-color: var(--ios-card-light);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .skill-category-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .skill-category-title i {
+        margin-right: 10px;
+        color: var(--ios-blue);
+      }
+
+      .skill-item {
+        margin-bottom: 12px;
+      }
+
+      .skill-name {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+      }
+
+      .skill-bar {
+        height: 6px;
+        background-color: rgba(0, 122, 255, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .skill-progress {
+        height: 100%;
+        background: linear-gradient(90deg, #007aff, #00c7ff);
+        border-radius: 3px;
+        transition: width 1s ease;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10px;
+        height: 100%;
+        width: 2px;
+        background-color: rgba(0, 122, 255, 0.2);
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-bottom: 30px;
+      }
+
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -30px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007aff, #00c7ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.6rem;
+      }
+
+      .timeline-date {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 5px;
+      }
+
+      .timeline-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .timeline-description {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 40px 0;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .footer-link {
+        color: var(--ios-blue);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Modal */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background-color: var(--ios-card-light);
+        border-radius: 20px;
+        width: 90%;
+        max-width: 700px;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 30px;
+        position: relative;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      body.dark-mode .modal-content {
+        background-color: var(--ios-card-dark);
+      }
+
+      .modal.active .modal-content {
+        transform: translateY(0);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .modal-subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+      }
+
+      .modal-image {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-description {
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+      }
+
+      .modal-features {
+        margin-bottom: 20px;
+      }
+
+      .modal-feature {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .modal-feature i {
+        color: var(--ios-blue);
+        margin-right: 10px;
+        margin-top: 3px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .name {
+          font-size: 2rem;
+        }
+
+        .title {
+          font-size: 1rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-badges {
+          flex-wrap: wrap;
+        }
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+      <header class="header">
+        <img
+          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJzNnBlcnJocnJrZHhycTZmdjB1eXo4NGc1bXNkdHJhdm9jcGxpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Dh5q0sShxgp13DwrvG/giphy.gif"
+          alt="Savva Ponomarev"
+          class="profile-image floating"
+        />
+        <h1 class="name">Savva Ponomarev</h1>
+        <p class="title">iOS Developer | Innopolis University Student</p>
+
+        <div class="contact-badges">
+          <a href="https://t.me/BrainPumpkin" class="badge" target="_blank">
+            <i class="fab fa-telegram"></i> Telegram
+          </a>
+          <a
+            href="https://discord.com/users/620312686508638209"
+            class="badge"
+            target="_blank"
+          >
+            <i class="fab fa-discord"></i> Discord
+          </a>
+          <a href="mailto:savipon@yandex.ru" class="badge" target="_blank">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+        </div>
+
+        <a href="#" class="download-cv">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+      </header>
+
+      <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="app-card">
+          <p class="app-description">
+            Hello there! I'm Savva, a passionate iOS Developer from Russia
+            currently studying at Innopolis University. I specialize in Swift
+            and have experience with Python, Java, and C#. I love creating
+            intuitive, beautiful mobile applications that solve real problems.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">Swift</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Java</span>
+            <span class="tech-badge">C#</span>
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">Firebase</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+
+        <div class="app-card project-card" data-project="fluently">
+          <div class="app-card-header">
+            <div class="app-icon">
+              <i class="fas fa-language"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Fluently</h3>
+              <p class="app-subtitle">AI-powered English learning app</p>
+            </div>
+          </div>
+          <p class="app-description">
+            Currently in development, Fluently creates personalized English
+            learning programs based on user preferences and current knowledge.
+            Built with SwiftUI, Google Sign-In, URLSession, KeyChain, and
+            SwiftData.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">Firebase</span>
+            <span class="tech-badge">KeyChain</span>
+            <span class="tech-badge">SwiftData</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="lumina">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #5856d6, #af52de)"
+            >
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Lumina Tech</h3>
+              <p class="app-subtitle">Calendar management with AI assistant</p>
+            </div>
+          </div>
+          <p class="app-description">
+            Developed for a startup, this app helps manage your calendar with an
+            AI assistant. Built with SwiftUI, EventKit for calendar events,
+            SwiftData for caching, and URLSession for server communication.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">EventKit</span>
+            <span class="tech-badge">VIPER</span>
+            <span class="tech-badge">SwiftData</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="friends">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #ff2d55, #ff9500)"
+            >
+              <i class="fas fa-user-friends"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Friends</h3>
+              <p class="app-subtitle">
+                Social app for managing meetups and debts
+              </p>
+            </div>
+          </div>
+          <p class="app-description">
+            Developed during a Yandex/Sirius course, this app helps friends
+            organize meetups, track debts, and maintain connections. I
+            implemented several UIKit screens, Firebase backend, and data
+            caching.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">Firebase</span>
+            <span class="tech-badge">Keychain</span>
+            <span class="tech-badge">FileManager</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="touchpad">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #34c759, #32ade6)"
+            >
+              <i class="fas fa-laptop"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Touchpad for MacBook</h3>
+              <p class="app-subtitle">
+                Use your iOS device as a wireless trackpad
+              </p>
+            </div>
+          </div>
+          <p class="app-description">
+            Created a Swift application that turns your iOS device into a
+            wireless trackpad for your MacBook. Uses UIKit for the interface and
+            MultipeerConnectivity for wireless communication between devices.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">MultipeerConnectivity</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-code"></i> Languages
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Swift</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Python</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Java</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>C#</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-mobile-alt"></i> iOS Development
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>SwiftUI</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>UIKit</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Combine</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Core Data</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-tools"></i> Tools
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Xcode</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Git</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Figma</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 75%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Firebase</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <h2 class="section-title">Education & Experience</h2>
+        <div class="app-card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div class="timeline-date">2023 - Present</div>
+              <h3 class="timeline-title">Innopolis University</h3>
+              <p class="timeline-description">
+                Bachelor's degree in Information Systems Engineering. Current
+                GPA: 4.11 (B).
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-school"></i></div>
+              <div class="timeline-date">Graduated 2023</div>
+              <h3 class="timeline-title">
+                Lyceum of Information Technologies #1537
+              </h3>
+              <p class="timeline-description">
+                Specialized IT class with focus on programming and computer
+                science.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-certificate"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">iOS Development Course</h3>
+              <p class="timeline-description">
+                Advanced iOS development course by Yandex and Sirius, covering
+                new frameworks and best practices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="hackathons">
+        <h2 class="section-title">Hackathons</h2>
+        <div class="app-card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">Huawei TechArena Kazan Challenge</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">IT_ONE Cup ML Challenge</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">Yurent Hackathon</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2024</div>
+              <h3 class="timeline-title">Agnia Challenge</h3>
+              <p class="timeline-description">
+                Hackathon by Innopolis University focusing on innovative
+                solutions.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2023</div>
+              <h3 class="timeline-title">HSE Game Development Hackathon</h3>
+              <p class="timeline-description">
+                Developed a game using Unity engine in a team setting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-links">
+          <a
+            href="https://github.com/Sawolfer"
+            class="footer-link"
+            target="_blank"
+            >GitHub</a
+          >
+          <a
+            href="https://t.me/BrainPumpkin"
+            class="footer-link"
+            target="_blank"
+            >Telegram</a
+          >
+          <a href="mailto:savipon@yandex.ru" class="footer-link" target="_blank"
+            >Email</a
+          >
+        </div>
+        <p>© 2024 Savva Ponomarev. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- Project Modals -->
+    <div class="modal" id="projectModal">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        <p class="modal-subtitle" id="modalSubtitle">Project Subtitle</p>
+
+        <div class="modal-image-container">
+          <img src="" alt="Project Image" class="modal-image" id="modalImage" />
+        </div>
+
+        <div class="modal-description" id="modalDescription">
+          Project description will go here.
+        </div>
+
+        <div class="modal-features">
+          <h3>Key Features:</h3>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 1 description</span>
+          </div>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 2 description</span>
+          </div>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 3 description</span>
+          </div>
+        </div>
+
+        <div class="tech-badges" id="modalTechBadges">
+          <!-- Tech badges will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      // Check for saved user preference
+      if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "enabled");
+          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          localStorage.setItem("darkMode", "disabled");
+          darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+      });
+
+      // Intersection Observer for scroll animations
+      const sections = document.querySelectorAll(".section");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Project Modal
+      const projectCards = document.querySelectorAll(".project-card");
+      const projectModal = document.getElementById("projectModal");
+      const modalClose = document.getElementById("modalClose");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalSubtitle = document.getElementById("modalSubtitle");
+      const modalImage = document.getElementById("modalImage");
+      const modalDescription = document.getElementById("modalDescription");
+      const modalTechBadges = document.getElementById("modalTechBadges");
+
+      // Project data
+      const projects = {
+        fluently: {
+          title: "Fluently",
+          subtitle: "AI-powered English learning app",
+          image:
+            "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+          description:
+            "Fluently is an innovative English learning application that creates personalized study programs based on user preferences and current knowledge level. The app features adaptive learning algorithms, interactive lessons, and progress tracking. I built the entire iOS application from scratch using SwiftUI for the interface, implementing Google Sign-In for authentication, URLSession for network requests, and KeyChain for secure credential storage. The app uses SwiftData for local persistence and UserDefaults for simple preference storage.",
+          features: [
+            "Personalized learning paths based on user level and goals",
+            "Interactive exercises with speech recognition",
+            "Progress tracking with detailed analytics",
+            "Offline mode with synchronized data",
+          ],
+          tech: ["SwiftUI", "Firebase", "KeyChain", "SwiftData", "URLSession"],
+        },
+        lumina: {
+          title: "Lumina Tech",
+          subtitle: "Calendar management with AI assistant",
+          image:
+            "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+          description:
+            "Lumina Tech is a smart calendar application developed for a startup that helps users manage their schedules with the assistance of an AI. The app analyzes your calendar patterns, suggests optimal meeting times, and can even draft email responses. I was responsible for the iOS development, creating the interface with SwiftUI and implementing EventKit for calendar integration. The app uses SwiftData for local caching and KeyChain for secure storage of credentials. Communication with the AI server is handled through URLSession with proper error handling and retry mechanisms.",
+          features: [
+            "AI-powered scheduling suggestions",
+            "Natural language event creation",
+            "Cross-platform calendar synchronization",
+            "Smart reminders and follow-ups",
+          ],
+          tech: ["SwiftUI", "EventKit", "VIPER", "SwiftData", "URLSession"],
+        },
+        friends: {
+          title: "Friends",
+          subtitle: "Social app for managing meetups and debts",
+          image:
+            "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+          description:
+            "Friends is a social application developed during an intensive course by Yandex and Sirius. The app helps groups of friends organize meetups, track shared expenses, and maintain connections. I developed several UIKit-based screens including the friend list and expense tracking interfaces. The app connects to a Firebase backend for data storage and synchronization. I implemented the network layer for API communication and used Keychain for secure authentication token storage. For caching user data, I utilized FileManager with proper serialization.",
+          features: [
+            "Group expense tracking with automatic splits",
+            "Event planning with RSVP functionality",
+            "Friend connections and activity feed",
+            "Push notifications for important updates",
+          ],
+          tech: ["UIKit", "Firebase", "Keychain", "FileManager"],
+        },
+        touchpad: {
+          title: "Touchpad for MacBook",
+          subtitle: "Use your iOS device as a wireless trackpad",
+          image:
+            "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+          description:
+            "This innovative application transforms your iOS device into a wireless trackpad for your MacBook. I developed both the iOS app (using UIKit) and the companion macOS application. The two devices communicate seamlessly using MultipeerConnectivity, providing low-latency cursor control. The iOS app features customizable sensitivity settings, gesture support, and even includes optional keyboard functionality. I implemented smooth animations for cursor movement feedback and optimized the networking layer for minimal battery impact.",
+          features: [
+            "Precise cursor control with adjustable sensitivity",
+            "Multi-touch gesture support (scroll, swipe, etc.)",
+            "Optional on-screen keyboard mode",
+            "Low-latency Bluetooth/WiFi connection",
+          ],
+          tech: ["UIKit", "MultipeerConnectivity"],
+        },
+      };
+
+      // Open modal when project card is clicked
+      projectCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const projectId = card.getAttribute("data-project");
+          const project = projects[projectId];
+
+          modalTitle.textContent = project.title;
+          modalSubtitle.textContent = project.subtitle;
+          modalImage.src = project.image;
+          modalDescription.textContent = project.description;
+
+          // Update features
+          const featuresContainer = document.querySelector(".modal-features");
+          featuresContainer.innerHTML = "<h3>Key Features:</h3>";
+
+          project.features.forEach((feature) => {
+            const featureElement = document.createElement("div");
+            featureElement.className = "modal-feature";
+            featureElement.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        <span>${feature}</span>
+                    `;
+            featuresContainer.appendChild(featureElement);
+          });
+
+          // Update tech badges
+          modalTechBadges.innerHTML = "";
+          project.tech.forEach((tech) => {
+            const badge = document.createElement("span");
+            badge.className = "tech-badge";
+            badge.textContent = tech;
+            modalTechBadges.appendChild(badge);
+          });
+
+          projectModal.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      // Close modal
+      modalClose.addEventListener("click", () => {
+        projectModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      });
+
+      // Close modal when clicking outside content
+      projectModal.addEventListener("click", (e) => {
+        if (e.target === projectModal) {
+          projectModal.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      });
+
+      // Animate skill bars when they come into view
+      const skillBars = document.querySelectorAll(".skill-progress");
+      const skillBarObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const width = entry.target.style.width;
+              entry.target.style.width = "0";
+              setTimeout(() => {
+                entry.target.style.width = width;
+              }, 100);
+            }
+          });
+        },
+        {
+          threshold: 0.5,
+        }
+      );
+
+      skillBars.forEach((bar) => {
+        skillBarObserver.observe(bar);
+      });
+    </script>
+  </body>
+</html>
