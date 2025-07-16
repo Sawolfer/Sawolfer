@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savva Ponomarev - iOS Developer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+      <header class="header">
+        <img
+          src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJzNnBlcnJocnJrZHhycTZmdjB1eXo4NGc1bXNkdHJhdm9jcGxpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Dh5q0sShxgp13DwrvG/giphy.gif"
+          alt="Savva Ponomarev"
+          class="profile-image floating"
+        />
+        <h1 class="name">Savva Ponomarev</h1>
+        <p class="title">iOS Developer | Innopolis University Student</p>
+
+        <div class="contact-badges">
+          <a href="https://t.me/BrainPumpkin" class="badge" target="_blank">
+            <i class="fab fa-telegram"></i> Telegram
+          </a>
+          <a
+            href="https://discord.com/users/620312686508638209"
+            class="badge"
+            target="_blank"
+          >
+            <i class="fab fa-discord"></i> Discord
+          </a>
+          <a href="mailto:savipon@yandex.ru" class="badge" target="_blank">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+        </div>
+
+        <a href="#" class="download-cv">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+      </header>
+
+      <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="app-card">
+          <p class="app-description">
+            Hello there! I'm Savva, a passionate iOS Developer from Russia
+            currently studying at Innopolis University. I specialize in Swift
+            and have experience with Python, Java, and C#. I love creating
+            intuitive, beautiful mobile applications that solve real problems.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">Swift</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Java</span>
+            <span class="tech-badge">C#</span>
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">Firebase</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+
+        <div class="app-card project-card" data-project="fluently">
+          <div class="app-card-header">
+            <div class="app-icon">
+              <i class="fas fa-language"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Fluently</h3>
+              <p class="app-subtitle">AI-powered English learning app</p>
+            </div>
+          </div>
+          <p class="app-description">
+            Currently in development, Fluently creates personalized English
+            learning programs based on user preferences and current knowledge.
+            Built with SwiftUI, Google Sign-In, URLSession, KeyChain, and
+            SwiftData.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">Firebase</span>
+            <span class="tech-badge">KeyChain</span>
+            <span class="tech-badge">SwiftData</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="lumina">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #5856d6, #af52de)"
+            >
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Lumina Tech</h3>
+              <p class="app-subtitle">Calendar management with AI assistant</p>
+            </div>
+          </div>
+          <p class="app-description">
+            Developed for a startup, this app helps manage your calendar with an
+            AI assistant. Built with SwiftUI, EventKit for calendar events,
+            SwiftData for caching, and URLSession for server communication.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">SwiftUI</span>
+            <span class="tech-badge">EventKit</span>
+            <span class="tech-badge">VIPER</span>
+            <span class="tech-badge">SwiftData</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="friends">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #ff2d55, #ff9500)"
+            >
+              <i class="fas fa-user-friends"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Friends</h3>
+              <p class="app-subtitle">
+                Social app for managing meetups and debts
+              </p>
+            </div>
+          </div>
+          <p class="app-description">
+            Developed during a Yandex/Sirius course, this app helps friends
+            organize meetups, track debts, and maintain connections. I
+            implemented several UIKit screens, Firebase backend, and data
+            caching.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">Firebase</span>
+            <span class="tech-badge">Keychain</span>
+            <span class="tech-badge">FileManager</span>
+          </div>
+        </div>
+
+        <div class="app-card project-card" data-project="touchpad">
+          <div class="app-card-header">
+            <div
+              class="app-icon"
+              style="background: linear-gradient(135deg, #34c759, #32ade6)"
+            >
+              <i class="fas fa-laptop"></i>
+            </div>
+            <div>
+              <h3 class="app-title">Touchpad for MacBook</h3>
+              <p class="app-subtitle">
+                Use your iOS device as a wireless trackpad
+              </p>
+            </div>
+          </div>
+          <p class="app-description">
+            Created a Swift application that turns your iOS device into a
+            wireless trackpad for your MacBook. Uses UIKit for the interface and
+            MultipeerConnectivity for wireless communication between devices.
+          </p>
+          <div class="tech-badges">
+            <span class="tech-badge">UIKit</span>
+            <span class="tech-badge">MultipeerConnectivity</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-code"></i> Languages
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Swift</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Python</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Java</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>C#</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-mobile-alt"></i> iOS Development
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>SwiftUI</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>UIKit</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 65%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Combine</span>
+                <span>Low intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 60%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Swift Data</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category-title">
+              <i class="fas fa-tools"></i> Tools
+            </h3>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Xcode</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Git</span>
+                <span>Advanced</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Figma</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>Firebase</span>
+                <span>Intermediate</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <h2 class="section-title">Education & Experience</h2>
+        <div class="app-card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div class="timeline-date">2023 - Present</div>
+              <h3 class="timeline-title">Innopolis University</h3>
+              <p class="timeline-description">
+                Bachelor's degree in Information Systems Engineering. Current
+                GPA: 4.11 (B).
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-school"></i></div>
+              <div class="timeline-date">Graduated 2023</div>
+              <h3 class="timeline-title">
+                Lyceum of Information Technologies #1537
+              </h3>
+              <p class="timeline-description">
+                Specialized IT class with focus on programming and computer
+                science.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-certificate"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">iOS Development Course</h3>
+              <p class="timeline-description">
+                Advanced iOS development course by Yandex and Sirius, covering
+                new frameworks and best practices.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="hackathons">
+        <h2 class="section-title">Hackathons</h2>
+        <div class="app-card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">Huawei TechArena Kazan Challenge</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">IT_ONE Cup ML Challenge</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">Yurent Hackathon</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2024</div>
+              <h3 class="timeline-title">Agnia Challenge</h3>
+              <p class="timeline-description">
+                Hackathon by Innopolis University focusing on innovative
+                solutions.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+              <div class="timeline-date">2023</div>
+              <h3 class="timeline-title">HSE Game Development Hackathon</h3>
+              <p class="timeline-description">
+                Developed a game using Unity engine in a team setting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-links">
+          <a
+            href="https://github.com/Sawolfer"
+            class="footer-link"
+            target="_blank"
+            >GitHub</a
+          >
+          <a
+            href="https://t.me/BrainPumpkin"
+            class="footer-link"
+            target="_blank"
+            >Telegram</a
+          >
+          <a href="mailto:savipon@yandex.ru" class="footer-link" target="_blank"
+            >Email</a
+          >
+        </div>
+        <p>© 2024 Savva Ponomarev. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- Project Modals -->
+    <div class="modal" id="projectModal">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        <p class="modal-subtitle" id="modalSubtitle">Project Subtitle</p>
+
+        <div class="modal-image-container">
+          <img src="" alt="Project Image" class="modal-image" id="modalImage" />
+        </div>
+
+        <div class="modal-description" id="modalDescription">
+          Project description will go here.
+        </div>
+
+        <div class="modal-features">
+          <h3>Key Features:</h3>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 1 description</span>
+          </div>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 2 description</span>
+          </div>
+          <div class="modal-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Feature 3 description</span>
+          </div>
+        </div>
+
+        <div class="tech-badges" id="modalTechBadges">
+          <!-- Tech badges will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
