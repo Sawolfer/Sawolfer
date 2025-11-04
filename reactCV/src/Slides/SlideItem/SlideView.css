@@ -1,0 +1,62 @@
+.slide {
+    width: 1000px;
+    height: 680px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.slide:hover {
+    transform: translateY(-5px);
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.text-overlay h3 {
+    margin: 0 0 8px 0;
+}
+
+.text-overlay p {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.hidden-content {
+    padding: 15px;
+    background: #f5f5f5;
+    border-top: 1px solid #eee;
+    color: #333;
+}
