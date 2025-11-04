@@ -15,11 +15,12 @@ function SlideList({ slides }: SlideListProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
+    const [dragOffset, setDragOffset] = useState(0);
     const lastWheelTime = useRef(0);
-    const containerRef = useRef<HTMLDivElement>(null);
 
-    document.body.style.overflowX = "hidden"
+    document.body.style.overflow = "hidden"
 
+    const delay = 100;
 
     const nextSlide = () => {
         setCurrentIndex(prev => (prev + 1) % slides.length);
@@ -29,14 +30,20 @@ function SlideList({ slides }: SlideListProps) {
         setCurrentIndex(prev => (prev - 1 + slides.length) % slides.length);
     };
 
+    // Touch/Mouse handlers
     const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
         setIsDragging(true);
         const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
         setStartX(clientX);
+        setDragOffset(0); 
     };
 
     const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
         if (!isDragging) return;
+        
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+        const diffX = startX - clientX;
+        setDragOffset(-diffX);
         e.preventDefault();
     };
 
@@ -49,63 +56,67 @@ function SlideList({ slides }: SlideListProps) {
 
         if (Math.abs(diffX) > swipeThreshold) {
             if (diffX > 0) {
-                nextSlide(); 
+                setDragOffset(-100);
+                setTimeout(() => {
+                    nextSlide();
+                    setDragOffset(0);
+                }, delay);
             } else {
-                prevSlide();
+                setDragOffset(100);
+                setTimeout(() => {
+                    prevSlide();
+                    setDragOffset(0);
+                }, delay);
             }
+        } else {
+            setDragOffset(0);
         }
         
         setIsDragging(false);
     };
 
+    // Wheel handler
     const handleWheel = (e: React.WheelEvent) => {
         const now = Date.now();
-        const throttleDelay = 500;
+        const throttleDelay = 800;
         
         if (now - lastWheelTime.current < throttleDelay) {
             return;
         }
         
-        const scrollThreshold = 8;
+        const scrollThreshold = 10;
         
-        if (Math.abs(e.deltaX) > scrollThreshold) {
-            if (e.deltaX < 0) {
-                prevSlide();
+        // const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const delta = e.deltaX;
+        // console.log('Wheel delta:', delta);
+        
+        if (Math.abs(delta) > scrollThreshold) {
+            if (delta < 0) {
+                setDragOffset(100);
+                setTimeout(() => {
+                    prevSlide();
+                    setDragOffset(0);
+                }, delay);
             } else {
-                nextSlide();
+                setDragOffset(-100);
+                setTimeout(() => {
+                    nextSlide();
+                    setDragOffset(0);
+                }, delay);
             }
-        } 
-        
-        lastWheelTime.current = now;
+            
+            lastWheelTime.current = now;
+        }
     };
 
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            } else if (e.key === ' ') {
-                e.preventDefault();
-                nextSlide();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [slides.length]);
-
+    // В JSX:
     return (
-        <div
-            className="carusel-container"
-            onWheel={handleWheel}
-        >
-            {/* Контейнер карусели */}
+        <div className="carousel-container">
             <div
                 className="carousel-track"
-                ref={containerRef}
                 style={{
-                    transform: `translateX(-${currentIndex * 100}%)`
+                    transform: `translateX(calc(-${currentIndex * 100}% + ${dragOffset}px))`,
+                    transition: dragOffset !== 0 ? 'transform 0.3s ease' : 'transform 0.4s ease'
                 }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -114,12 +125,10 @@ function SlideList({ slides }: SlideListProps) {
                 onMouseMove={handleTouchMove}
                 onMouseUp={handleTouchEnd}
                 onMouseLeave={handleTouchEnd}
+                onWheel={handleWheel}
             >
                 {slides.map((slide) => (
-                    <div 
-                        key={slide.id} 
-                        className="carousel-slide"
-                    >
+                    <div key={slide.id} className="carousel-slide">
                         <SlideView slide={slide} />
                     </div>
                 ))}

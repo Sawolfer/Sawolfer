@@ -6,7 +6,7 @@
 
 .carousel-track {
     display: flex;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .carousel-slide {
@@ -32,12 +32,15 @@
     padding: 8px 16px;
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
+
+    width: 180px;
+    place-items: center;
 }
 
 .indicator {
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 1px;
+    height: 1px;
     padding: 2px;
     border-radius: 100px;
     background: rgba(255, 255, 255, 0.5);
@@ -71,7 +74,7 @@
 
 .indicator.active {
     width: 120px;
-    height: 6px;
+    height: 1px;
     min-width: 24px;
     border-radius: 33px;
     background: white;
