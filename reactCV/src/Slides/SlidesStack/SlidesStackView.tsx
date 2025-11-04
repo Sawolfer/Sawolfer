@@ -60,7 +60,7 @@ function SlideList({ slides }: SlideListProps) {
 
     const handleWheel = (e: React.WheelEvent) => {
         const now = Date.now();
-        const throttleDelay = 300;
+        const throttleDelay = 500;
         
         if (now - lastWheelTime.current < throttleDelay) {
             return;
