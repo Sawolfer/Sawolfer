@@ -17,6 +17,6 @@ export const mockSlides: SlideModel[] = [
     id: 2, 
     title: "Карточка 2",
     description: "Описание 2",
-    imageUrl: "/image2.jpg"
+    imageUrl: "/screens.png"
   }
 ];
