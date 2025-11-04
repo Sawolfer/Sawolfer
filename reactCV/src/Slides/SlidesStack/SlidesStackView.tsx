@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-
 import SlideView from '../SlideItem/SlideView';
 import type { SlideModel } from '../SlideItem/SlideModel';
-
 import GlassSurface from '../../ViewComponents/LiquidGlass/LiquidGlass';
-
 import "./SlidesStackView.css"
 
 interface SlideListProps {
@@ -18,9 +15,12 @@ function SlideList({ slides }: SlideListProps) {
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [dragOffset, setDragOffset] = useState(0);
+    const [isIndicatorSticky, setIsIndicatorSticky] = useState(false);
     const lastWheelTime = useRef(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const indicatorRef = useRef<HTMLDivElement>(null);
 
-    document.body.style.overflow = "hidden"
+    document.body.style.overflowX = "hidden";
 
     const delay = 100;
 
@@ -31,6 +31,31 @@ function SlideList({ slides }: SlideListProps) {
     const prevSlide = () => {
         setCurrentIndex(prev => (prev - 1 + slides.length) % slides.length);
     };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setIsIndicatorSticky(false);
+                    } else {
+                        setIsIndicatorSticky(true);
+                    }
+                });
+            },
+            { 
+                root: null,
+                rootMargin: '-80% 0px -20% 0px',
+                threshold: 0
+            }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     // Touch/Mouse handlers
     const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
@@ -77,7 +102,6 @@ function SlideList({ slides }: SlideListProps) {
         setIsDragging(false);
     };
 
-    // Wheel handler
     const handleWheel = (e: React.WheelEvent) => {
         const now = Date.now();
         const throttleDelay = 800;
@@ -87,10 +111,7 @@ function SlideList({ slides }: SlideListProps) {
         }
         
         const scrollThreshold = 10;
-        
-        // const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
         const delta = e.deltaX;
-        // console.log('Wheel delta:', delta);
         
         if (Math.abs(delta) > scrollThreshold) {
             if (delta < 0) {
@@ -111,9 +132,8 @@ function SlideList({ slides }: SlideListProps) {
         }
     };
 
-    // В JSX:
     return (
-        <div className="carousel-container">
+        <div className="carousel-container" ref={containerRef}>
             <div
                 className="carousel-track"
                 style={{
@@ -136,8 +156,12 @@ function SlideList({ slides }: SlideListProps) {
                 ))}
             </div>
 
-            {/* Индикаторы */}
-            <GlassSurface
+            {/* Индикатор с эффектом прилипания */}
+            <div 
+                ref={indicatorRef}
+                className={`indicator-container ${isIndicatorSticky ? 'sticky' : 'floating'}`}
+            >
+                <GlassSurface
                     width={300} 
                     height={50}
                     borderRadius={24}
@@ -146,11 +170,12 @@ function SlideList({ slides }: SlideListProps) {
                     {slides.map((_, index) => (
                         <button
                             key={index}
-                            className={`indicator ${index === currentIndex ? 'active' : 'indicator'}`}
+                            className={`indicator ${index === currentIndex ? 'active' : ''}`}
                             onClick={() => setCurrentIndex(index)}
                         />
                     ))}
-            </GlassSurface>
+                </GlassSurface>
+            </div>
         </div>
     );
 }
