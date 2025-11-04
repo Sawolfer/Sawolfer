@@ -1,0 +1,10 @@
+.horizontal-list {
+    display: flex;
+    gap: 16px;
+    /* Space between items */
+    padding: 20px;
+    overflow-x: auto;
+    /* Enable horizontal scrolling if needed */
+    white-space: nowrap;
+    /* Prevent wrapping */
+}
