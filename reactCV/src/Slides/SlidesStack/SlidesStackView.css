@@ -1,10 +1,83 @@
-.horizontal-list {
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.carousel-track {
     display: flex;
-    gap: 16px;
-    /* Space between items */
+    transition: transform 0.4s ease;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    overflow-x: auto;
-    /* Enable horizontal scrolling if needed */
-    white-space: nowrap;
-    /* Prevent wrapping */
+    box-sizing: border-box;
+}
+
+/* Индикаторы */
+
+.carousel-indicators {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    border-radius: 20px;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.indicator {
+    display: block;
+    width: 6px;
+    height: 6px;
+    padding: 2px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    flex-shrink: 0;
+    box-sizing: content-box;
+
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.indicator:focus,
+.indicator:active,
+.indicator:hover,
+.indicator:focus-visible,
+.indicator:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.indicator.active {
+    width: 120px;
+    height: 6px;
+    min-width: 24px;
+    border-radius: 33px;
+    background: white;
+}
+
+.indicator:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.8);
 }

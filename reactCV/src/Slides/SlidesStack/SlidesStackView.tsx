@@ -7,13 +7,24 @@ import "./SlidesStackView.css"
 
 interface SlideListProps {
     slides: SlideModel[];
+    autoplay?: boolean;
+    autoplayDelay?: number;
 }
 
 function SlideList({ slides }: SlideListProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [startX, setStartX] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+
+
+    const nextSlide = () => {
+        setCurrentIndex(prev => (prev + 1) % slides.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex(prev => (prev - 1 + slides.length) % slides.length);
+    };
 
     const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
         setIsDragging(true);
@@ -21,10 +32,10 @@ function SlideList({ slides }: SlideListProps) {
         setStartX(clientX);
     };
 
-    const handleToucMove = (e: React.TouchEvent | React.MouseEvent) => {
+    const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
         if (!isDragging) return;
         e.preventDefault();
-    }
+    };
 
     const handleTouchEnd = (e: React.TouchEvent | React.MouseEvent) => {
         if (!isDragging) return;
@@ -35,37 +46,52 @@ function SlideList({ slides }: SlideListProps) {
 
         if (Math.abs(diffX) > swipeThreshold) {
             if (diffX > 0) {
-                // Swipe left - next slide
-                setCurrentIndex(prev => Math.min(prev + 1, slides.length - 1));
+                nextSlide(); 
             } else {
-                // Swipe right - previous slide
-                setCurrentIndex(prev => Math.max(prev - 1, 0));
+                prevSlide();
             }
         }
         
         setIsDragging(false);
     };
 
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowLeft') {
-                setCurrentIndex(prev => Math.max(prev - 1, 0));
-            } else if (e.key === 'ArrowRight') {
-                setCurrentIndex(prev => Math.min(prev + 1, slides.length - 1));
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [slides.length]);
-
     return (
-        <div className="horizontal-list">
-        {slides.map(item => (
-            <div key={item.id} className="list-item">
-                <SlideView key={item.id} slide={item}/>
+        <div className="carusel-container">
+            {/* Контейнер карусели */}
+            <div
+                className="carousel-track"
+                ref={containerRef}
+                style={{
+                    transform: `translateX(-${currentIndex * 100}%)`
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onMouseDown={handleTouchStart}
+                onMouseMove={handleTouchMove}
+                onMouseUp={handleTouchEnd}
+                onMouseLeave={handleTouchEnd}
+            >
+                {slides.map((slide) => (
+                    <div 
+                        key={slide.id} 
+                        className="carousel-slide"
+                    >
+                        <SlideView slide={slide} />
+                    </div>
+                ))}
             </div>
-        ))}
+
+            {/* Индикаторы */}
+            <div className="carousel-indicators">
+                {slides.map((_, index) => (
+                    <button
+                        key={index}
+                        className={`indicator ${index === currentIndex ? 'active' : 'indicator'}`}
+                        onClick={() => setCurrentIndex(index)}
+                    />
+                ))}
+            </div>
         </div>
     );
 

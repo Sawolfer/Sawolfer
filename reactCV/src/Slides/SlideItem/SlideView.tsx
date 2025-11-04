@@ -15,9 +15,13 @@ function SlideView({ slide }: SlideViewProps ) {
 
     return (
         <div className='slide' onClick={handleClick}>
-            <img src={slide.imageUrl} alt={slide.title} />
-            {slide.title && <h3>{slide.title}</h3>}
-            {slide.description && <p>{slide.description}</p>}
+            <div className="image-container">
+                <img src={slide.imageUrl} alt={slide.title} />
+                <div className="text-overlay">
+                    {slide.title && <h3>{slide.title}</h3>}
+                    {slide.description && <p>{slide.description}</p>}
+                </div>
+            </div>
 
             {isVisible && (
                 <div className="hidden-content">
