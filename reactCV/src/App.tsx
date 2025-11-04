@@ -8,7 +8,9 @@ function App() {
 
   return (
     <>
-      <SlideList slides={mockSlides} />
+      <div className='slides'>
+          <SlideList slides={mockSlides} />
+        </div>
     </>
   )
 }

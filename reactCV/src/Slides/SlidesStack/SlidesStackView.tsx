@@ -15,7 +15,10 @@ function SlideList({ slides }: SlideListProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
+    const lastWheelTime = useRef(0);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    document.body.style.overflow = "hidden"
 
 
     const nextSlide = () => {
@@ -55,8 +58,48 @@ function SlideList({ slides }: SlideListProps) {
         setIsDragging(false);
     };
 
+    const handleWheel = (e: React.WheelEvent) => {
+        const now = Date.now();
+        const throttleDelay = 300;
+        
+        if (now - lastWheelTime.current < throttleDelay) {
+            return;
+        }
+        
+        const scrollThreshold = 8;
+        
+        if (Math.abs(e.deltaX) > scrollThreshold) {
+            if (e.deltaX < 0) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        } 
+        
+        lastWheelTime.current = now;
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [slides.length]);
+
     return (
-        <div className="carusel-container">
+        <div
+            className="carusel-container"
+            onWheel={handleWheel}
+        >
             {/* Контейнер карусели */}
             <div
                 className="carousel-track"
@@ -94,7 +137,6 @@ function SlideList({ slides }: SlideListProps) {
             </div>
         </div>
     );
-
 }
 
 export default SlideList;
