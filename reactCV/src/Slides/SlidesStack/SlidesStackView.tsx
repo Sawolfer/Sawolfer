@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import SlideView from '../SlideItem/SlideView';
 import type { SlideModel } from '../SlideItem/SlideModel';
 
+import GlassSurface from '../../ViewComponents/LiquidGlass/LiquidGlass';
+
 import "./SlidesStackView.css"
 
 interface SlideListProps {
@@ -135,15 +137,20 @@ function SlideList({ slides }: SlideListProps) {
             </div>
 
             {/* Индикаторы */}
-            <div className="carousel-indicators">
-                {slides.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`indicator ${index === currentIndex ? 'active' : 'indicator'}`}
-                        onClick={() => setCurrentIndex(index)}
-                    />
-                ))}
-            </div>
+            <GlassSurface
+                    width={300} 
+                    height={50}
+                    borderRadius={24}
+                    className='carousel-glass'
+                >
+                    {slides.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`indicator ${index === currentIndex ? 'active' : 'indicator'}`}
+                            onClick={() => setCurrentIndex(index)}
+                        />
+                    ))}
+            </GlassSurface>
         </div>
     );
 }
