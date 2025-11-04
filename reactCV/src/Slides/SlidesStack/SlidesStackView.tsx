@@ -18,7 +18,7 @@ function SlideList({ slides }: SlideListProps) {
     const lastWheelTime = useRef(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    document.body.style.overflow = "hidden"
+    document.body.style.overflowX = "hidden"
 
 
     const nextSlide = () => {
