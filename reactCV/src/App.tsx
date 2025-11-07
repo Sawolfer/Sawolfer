@@ -11,23 +11,23 @@ function App() {
     <>
       <div className='content'>
         <div className='header-text'>
-          <SplitText
-            text="Hello! I'm Savva"
-            className="split-text"
-            delay={100}
-            duration={0.6}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
-            textAlign="center"
-            tag='h1'
-          />
           <div className='about-me'>
+            <SplitText
+              text="Hello! I'm Savva"
+              className="split-text"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+              tag='h1'
+            />
             <p className='about-me-text'>
-              3rd year Bachelor student at Innopolis University
+              3rd year Bachelor student at Innopolis University <br/>
               Turning ideas into elegant digital solutions
             </p>
           </div>

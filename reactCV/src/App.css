@@ -25,6 +25,11 @@
   position: relative;
 }
 
+.about-me-text {
+  font-size: large;
+  font-weight: 600;
+}
+
 .my-image {
   position: absolute;
   top: 0;

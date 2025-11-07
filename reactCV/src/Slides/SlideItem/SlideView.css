@@ -1,7 +1,7 @@
 .slide {
-    width: 1000px;
-    height: 680px;
-    background: white;
+    width: 1280px;
+    height: 750px;
+    background: black;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -32,26 +32,35 @@
     left: 0;
     right: 0;
     bottom: 0;
-    color: rgb(0, 0, 0);
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    text-align: center;
     padding: 20px;
     box-sizing: border-box;
     font-size: 17px;
     font-style: normal;
     font-weight: 400;
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .text-overlay h3 {
     margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: gentleReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
 .text-overlay p {
     margin: 0;
     font-size: 0.9em;
     opacity: 0.9;
+
+    opacity: 0;
+    transform: scale(1);
+    animation: gentleReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
 .hidden-content {
@@ -59,4 +68,24 @@
     background: #f5f5f5;
     border-top: 1px solid #eee;
     color: #333;
+}
+
+@keyframes gentleReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(10px);
+        filter: blur(4px);
+    }
+
+    70% {
+        opacity: 0.8;
+        transform: scale(1.02) translateY(0);
+        filter: blur(1px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
 }

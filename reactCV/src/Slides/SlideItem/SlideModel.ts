@@ -7,17 +7,17 @@ export interface SlideModel {
 }
 
 export const mockSlides: SlideModel[] = [
-  {
-    id: 1,
-    title: "Карточка 1",
-    description: "Описание 1",
-    imageUrl: "/fluently.png"
-  },
+  // {
+  //   id: 1,
+  //   title: "Карточка 1",
+  //   description: "Описание 1",
+  //   imageUrl: "/fluently.png"
+  // },
   {
     id: 2, 
     title: "Card 2",
     description: "Description 2",
-    imageUrl: "/luminia.png"
+    imageUrl: "/Untitled_Artwork.png"
   },
   {
     id: 3, 
@@ -29,6 +29,6 @@ export const mockSlides: SlideModel[] = [
     id: 4, 
     title: "Card 2",
     description: "Description 2",
-    imageUrl: "/luminia.png"
+    imageUrl: "/Untitled_Artwork.png"
   }
 ];
