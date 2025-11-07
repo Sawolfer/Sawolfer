@@ -9,23 +9,39 @@ function App() {
 
   return (
     <>
-      <div className='slides'>
-        <SplitText
-          text="Savva Ponomarev"
-          className="split-text"
-          delay={100}
-          duration={0.6}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
-          textAlign="center"
-          tag='h1'
+      <div className='content'>
+        <div className='header-text'>
+          <SplitText
+            text="Hello! I'm Savva"
+            className="split-text"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+            tag='h1'
           />
-        <SlideList slides={mockSlides} />
+          <div className='about-me'>
+            <p className='about-me-text'>
+              3rd year Bachelor student at Innopolis University
+              Turning ideas into elegant digital solutions
+            </p>
+          </div>
+          <img src='/background.jpg' alt='image' className='my-image' />
         </div>
+        <div className='projects'>
+          <p className='projects-header'>
+            Here you can check my projects
+          </p>
+          <div className='slides'>
+            <SlideList slides={mockSlides} />
+          </div>
+        </div>
+      </div>
     </>
   )
 }
