@@ -1,8 +1,11 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .content {
@@ -25,7 +28,13 @@
   position: relative;
 }
 
+.about-me {
+  color: whitesmoke;
+  font-weight: 600;
+}
+
 .about-me-text {
+  color: whitesmoke;
   font-size: large;
   font-weight: 600;
 }
@@ -49,7 +58,7 @@
   font-size: 56px;
   line-height: 1.0714285714;
   font-weight: 600;
-
+  color: whitesmoke;
 }
 
 .card {

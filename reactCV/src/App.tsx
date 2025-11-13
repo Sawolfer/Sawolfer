@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import React from 'react';
 import './App.css'
 
@@ -6,6 +7,17 @@ import SlideList from './Slides/SlidesStack/SlidesStackView';
 import { mockSlides } from './Slides/SlideItem/SlideModel';
 
 function App() {
+
+  useEffect(() => {
+    document.body.style.backgroundColor = 'rgb(42 42 45 / 0.72)';
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.minHeight = '100vh';
+    
+    return () => {
+      document.body.style.backgroundColor = '';
+    };
+  }, []);
 
   return (
     <>
