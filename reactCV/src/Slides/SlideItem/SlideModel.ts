@@ -1,9 +1,12 @@
 
 export interface SlideModel {
-    id: number;
-    title?: string;
-    description?: string;
-    imageUrl: string;
+  id: number;
+  title?: string;
+  description?: string;
+  imageUrl: string;
+  
+  blurLevel?: number;
+  textPosition?: 'center' | 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right';
 }
 
 export const mockSlides: SlideModel[] = [

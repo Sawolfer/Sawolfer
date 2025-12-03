@@ -38,22 +38,22 @@ function SlideList({ slides }: SlideListProps) {
     };
 
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!containerRef.current) return;
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         if (!containerRef.current) return;
             
-            const carouselRect = containerRef.current.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
+    //         const carouselRect = containerRef.current.getBoundingClientRect();
+    //         const viewportHeight = window.innerHeight;
             
-            const shouldFix = carouselRect.bottom <= (viewportHeight - 30);
-            setIsIndicatorsFixed(shouldFix);
-        };
+    //         const shouldFix = carouselRect.bottom <= (viewportHeight - 30);
+    //         setIsIndicatorsFixed(shouldFix);
+    //     };
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
+    //     window.addEventListener('scroll', handleScroll);
+    //     handleScroll();
         
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, []);
 
     // Touch/Mouse handlers
     const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
@@ -130,7 +130,7 @@ function SlideList({ slides }: SlideListProps) {
     };
 
     return (
-        <div className="carousel-container" ref={containerRef}>
+        <div className="carousel-container">
             <div
                 className="carousel-track"
                 style={{

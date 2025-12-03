@@ -36,11 +36,29 @@ function SlideView({ slide }: SlideViewProps) {
         };
     }, []);
 
+    const getTextPositionClass = () => {
+        switch (slide.textPosition) {
+            case 'top-center': return 'text-top-center';
+            case 'top-left': return 'text-top-left';
+            case 'top-right': return 'text-top-right';
+            case 'bottom-center': return 'text-bottom-center';
+            case 'bottom-left': return 'text-bottom-left';
+            case 'bottom-right': return 'text-bottom-right';
+            default: return 'text-center';
+        }
+    };
+
     return (
         <div className='slide' onClick={() => setIsVisible(!isVisible)} ref={slideRef}>
-            <div className="image-container">
-                <img src={slide.imageUrl} alt={slide.title} />
-                <div className="text-overlay">
+            <div className={`image-container`}>
+                <img
+                    src={slide.imageUrl}
+                    alt={slide.title}
+                    style={{ 
+                        filter: slide.blurLevel ?? 0 > 0 ? `blur(${slide.blurLevel ?? 0}px)` : 'none' 
+                    }} 
+                />
+                <div className={`text-overlay ${getTextPositionClass()}`}>
                     {slide.title && (
                         <h3 className={shouldAnimate ? 'animate-in' : ''}>
                             {slide.title}

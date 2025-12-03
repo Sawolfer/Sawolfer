@@ -5,6 +5,7 @@ import './App.css'
 import SplitText from './CVHeader/Header';
 import SlideList from './Slides/SlidesStack/SlidesStackView';
 import { mockSlides } from './Slides/SlideItem/SlideModel';
+import { whoamiSlideInfo } from './Slides/CustomSlides/Whoami';
 
 function App() {
 
@@ -47,7 +48,15 @@ function App() {
         </div>
         <div className='projects'>
           <p className='projects-header'>
-            Here you can check my projects
+            About me
+          </p>
+          <div className='slides'>
+            <SlideList slides={[whoamiSlideInfo]} />
+          </div>
+        </div>
+        <div className='projects'>
+          <p className='projects-header'>
+            Here what I've done
           </p>
           <div className='slides'>
             <SlideList slides={mockSlides} />
