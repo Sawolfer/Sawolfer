@@ -2,7 +2,7 @@
 
 ###
 
-<h2 align="left">Hello there! My name is Savva and I'm a iOS Developer from Russia.</h2>
+<h2 align="left">Hello there! My name is Savva and I'm a Mobile App Developer from Russia.</h2>
 
 ###
 
@@ -45,6 +45,8 @@
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" height="40" alt="unity logo"  />
   <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" height="40" alt="flutter logo"  />
+  <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="40" alt="firebase logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" height="40" alt="figma logo"  />
@@ -65,8 +67,6 @@
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" height="40" alt="flutter logo"  />
-  <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" height="40" alt="cplusplus logo"  />
 </div>
 
@@ -85,11 +85,11 @@
 </div>
 
 ###
-
+<!-- 
 <div align="center"> 
   <a href="https://sawolfer.github.io/Sawolfer/site/index" target="_blank">
   <img src="https://img.shields.io/badge/iOS_CV-000000?style=for-the-badge&logo=apple&logoColor=FFFFFF" height="40" alt="iOS CV"/>
-</div>
+</div> -->
 
 ###
 
